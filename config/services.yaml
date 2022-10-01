@@ -12,8 +12,8 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         # Binding arguments by name or type
         # https://symfony.com/doc/current/service_container.html#binding-arguments-by-name-or-type
-        #bind:
-        #    'bool $isDebug': '%kernel.debug%'
+        bind:
+            $baseImagesPath: '%kernel.project_dir%/public/build'
 
 
     # makes classes in src/ available to be used as services
