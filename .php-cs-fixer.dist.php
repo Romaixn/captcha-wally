@@ -7,9 +7,6 @@ declare(strict_types=1);
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude('var')
-    ->exclude('code')
-    ->exclude('snapshots')
-    ->exclude('tmp')
 ;
 
 return (new PhpCsFixer\Config())->setRules([
@@ -25,4 +22,5 @@ return (new PhpCsFixer\Config())->setRules([
         'scope' => 'namespaced',
         'strict' => true,
     ], ])
+    ->setRiskyAllowed(true)
     ->setFinder($finder);

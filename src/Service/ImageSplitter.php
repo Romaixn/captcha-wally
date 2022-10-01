@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 class ImageSplitter
@@ -13,13 +15,13 @@ class ImageSplitter
         $width = 250;
         $height = 250;
 
-        $source = imagecreatefrompng($this->baseImagesPath . $imagePath);
+        $source = imagecreatefrompng($this->baseImagesPath.$imagePath);
         $source_width = imagesx($source);
         $source_height = imagesy($source);
 
-        for ($col = 0; $col < $source_width / $width; $col++) {
-            for ($row = 0; $row < $source_height / $height; $row++) {
-                $fn = sprintf($this->baseImagesPath . "/images/wally-generated-%02d-%02d.jpg", $col, $row);
+        for ($col = 0; $col < $source_width / $width; ++$col) {
+            for ($row = 0; $row < $source_height / $height; ++$row) {
+                $fn = sprintf($this->baseImagesPath.'/images/wally-generated-%02d-%02d.jpg', $col, $row);
 
                 $im = @imagecreatetruecolor($width, $height);
                 imagecopyresized($im, $source, 0, 0,
