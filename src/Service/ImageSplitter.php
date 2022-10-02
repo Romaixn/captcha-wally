@@ -10,23 +10,21 @@ class ImageSplitter
     {
     }
 
-	/**
-	 * Split an image by a given number of rows and columns
-	 * Images are saved in the public/build/images folder
-	 *
-	 * @param string $imagePath The path to the image to split
-	 * @param integer $cols The number of columns
-	 * @param integer $rows The number of rows
-	 *
-	 * @return void
-	 */
+    /**
+     * Split an image by a given number of rows and columns
+     * Images are saved in the public/build/images folder.
+     *
+     * @param string $imagePath The path to the image to split
+     * @param int    $cols      The number of columns
+     * @param int    $rows      The number of rows
+     */
     public function split(string $imagePath, int $cols = 4, int $rows = 4): void
     {
         $source_image = imagecreatefrompng($this->baseImagesPath.$imagePath);
         $source_image_width = imagesx($source_image);
         $source_image_height = imagesy($source_image);
-		$split_width = (int) round( $source_image_width / $cols );
-		$split_height = (int) round( $source_image_height / $rows );
+        $split_width = (int) round($source_image_width / $cols);
+        $split_height = (int) round($source_image_height / $rows);
 
         for ($col = 0; $col < $cols; ++$col) {
             for ($row = 0; $row < $rows; ++$row) {
