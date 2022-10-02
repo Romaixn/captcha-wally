@@ -10,7 +10,7 @@
 		
 		<div class="images_wrapper">
 			{% for image in images %}
-				<img src="{{ asset( 'build/images/' ~ image ) }}" alt="Wally" />
+				<img src="{{ asset( 'build/images/' ~ image.name ) }}" alt="Wally" />
 			{% endfor %}
 		</div>
     </div>

@@ -43,10 +43,25 @@ class ImageSplitter
 	 */
 	public function getSplittedImages( string $imagePath ): array
 	{
-		$images = glob( $this->baseImagesPath . '/images/wally-generated-*.jpg' ) ?: [];
-		$images = array_map( fn( $image ) => basename( $image ), $images );
+		$splitted_images = [];
+		$generated_name  = 'wally-generated-';
+
+		$images         = glob( $this->baseImagesPath . '/images/' . $generated_name . '*.jpg' ) ?: [];
+		$images         = array_map( fn( $image ) => basename( $image ), $images );
 		sort( $images );
 
-		return $images;
+		foreach ( $images as $image ) {
+			$image_name = $image;
+			$image_col  = (int) substr( $image_name, strlen( $generated_name ), 2 );
+			$image_row  = (int) substr( $image_name, strlen( $generated_name ) + 3, 2 );
+
+			$splitted_images[] = [
+				'name' => $image_name,
+				'col'  => $image_col,
+				'row'  => $image_row,
+			];
+		}
+
+		return $splitted_images;
 	}
 }
