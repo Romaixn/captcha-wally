@@ -16,7 +16,7 @@ final class HomeController extends AbstractController
     public function index(ImageFinder $imageFinder, ImageSplitter $imageSplitter): Response
     {
         $image = $imageFinder->getAssetUrl('images/wally-1.png');
-        $imageSplitter->split($image);
+        $imageSplitter->split($image, 4, 3);
 
         $images = $imageSplitter->getSplittedImages($image);
 
