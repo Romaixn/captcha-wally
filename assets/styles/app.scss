@@ -3,3 +3,16 @@
 @tailwind utilities;
 
 @import 'fonts/inter';
+
+// TODO: Move this to a separate file
+.image {
+	grid-column: var(--grid-column, 0);
+	grid-row: var(--grid-row, 0);
+
+	&__wrapper {
+		--cols: 4;
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(var(--cols), 1fr);
+	}
+}

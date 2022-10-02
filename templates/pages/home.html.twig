@@ -6,11 +6,11 @@
     <div class="container mx-auto px-4">
         <h1 class="text-2xl">Captcha Wally (Waldo)</h1>
 
-		{{ dump(images) }}
-		
-		<div class="images_wrapper">
+		<div class="image__wrapper">
 			{% for image in images %}
-				<img src="{{ asset( 'build/images/' ~ image.name ) }}" alt="Wally" />
+				<figure class="image" style="--grid-col: {{ image.col }};--grid-row: {{ image.row }}">
+					<img src="{{ asset( 'build/images/' ~ image.name ) }}" alt="Where is Wally ?" />
+				</figure>
 			{% endfor %}
 		</div>
     </div>
