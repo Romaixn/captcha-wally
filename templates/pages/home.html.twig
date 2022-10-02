@@ -5,5 +5,13 @@
 {% block body %}
     <div class="container mx-auto px-4">
         <h1 class="text-2xl">Captcha Wally (Waldo)</h1>
+
+		<div class="image__wrapper">
+			{% for image in images %}
+				<figure class="image" style="--grid-col: {{ image.col + 1 }};--grid-row: {{ image.row + 1 }}">
+					<img src="{{ asset( 'build/images/' ~ image.name ) }}" alt="Where is Wally ?" />
+				</figure>
+			{% endfor %}
+		</div>
     </div>
 {% endblock %}
