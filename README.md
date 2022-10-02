@@ -30,6 +30,7 @@ git clone https://github.com/Romaixn/captcha-wally.git
 Install the dependencies:
 ```bash
 composer install
+npm i
 ```
 
 Run the server:
@@ -43,11 +44,36 @@ Or with PHP :
 php -S localhost:8000 -t public
 ```
 
+Build the assets:
+```bash
+npm run dev
+```
+
 And go to [https://localhost:8000](https://localhost:8000) 🚀
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome !<br />Feel free to check [issues page](https://github.com/Romaixn/captcha-wally/issues).
+
+To contribute to this project, please follow these steps:
+
+Fork this repository.
+
+Clone your forked repository.
+
+Follow the [Installing](#installing) section.
+
+After that, you can make your changes.
+
+Run the analysis tool to ensure that everything is working. :
+```bash
+vendor/bin/psalm
+```
+
+Fix the code style:
+```bash
+vendor/bin/php-cs-fixer fix
+```
 
 ## Show your support
 
