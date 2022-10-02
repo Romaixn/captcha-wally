@@ -17,11 +17,11 @@ final class HomeController extends AbstractController
     {
         $image = $imageFinder->getAssetUrl('images/wally-1.png');
         $imageSplitter->split($image);
-		
-		$images = $imageSplitter->getSplittedImages( $image );
 
-        return $this->render('pages/home.html.twig', [ 
-			'images' => $images
-		] );
+        $images = $imageSplitter->getSplittedImages($image);
+
+        return $this->render('pages/home.html.twig', [
+            'images' => $images,
+        ]);
     }
 }
