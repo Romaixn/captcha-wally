@@ -22,14 +22,11 @@ class ImageSplitter
 	 */
     public function split(string $imagePath, int $cols = 4, int $rows = 4): void
     {
-        $split_width = 250;
-        $split_height = 250;
-
         $source_image = imagecreatefrompng($this->baseImagesPath.$imagePath);
         $source_image_width = imagesx($source_image);
         $source_image_height = imagesy($source_image);
-		$split_width = $source_image_width / $cols;
-		$split_height = $source_image_height / $rows;
+		$split_width = (int) round( $source_image_width / $cols );
+		$split_height = (int) round( $source_image_height / $rows );
 
         for ($col = 0; $col < $cols; ++$col) {
             for ($row = 0; $row < $rows; ++$row) {
