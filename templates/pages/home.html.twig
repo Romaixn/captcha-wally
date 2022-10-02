@@ -5,5 +5,13 @@
 {% block body %}
     <div class="container mx-auto px-4">
         <h1 class="text-2xl">Captcha Wally (Waldo)</h1>
+
+		{{ dump(images) }}
+		
+		<div class="images_wrapper">
+			{% for image in images %}
+				<img src="{{ asset( 'build/images/' ~ image ) }}" alt="Wally" />
+			{% endfor %}
+		</div>
     </div>
 {% endblock %}

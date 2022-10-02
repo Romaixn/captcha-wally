@@ -32,4 +32,21 @@ class ImageSplitter
             }
         }
     }
+
+	/**
+	 * Build an array of splitted images names from the original image path
+	 *
+	 * @param string $imagePath The original image path
+	 * @todo Link $imagePath to the glob function with a pattern
+	 *
+	 * @return array The array of splitted images names
+	 */
+	public function getSplittedImages( string $imagePath ): array
+	{
+		$images = glob( $this->baseImagesPath . '/images/wally-generated-*.jpg' ) ?: [];
+		$images = array_map( fn( $image ) => basename( $image ), $images );
+		sort( $images );
+
+		return $images;
+	}
 }
