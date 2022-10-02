@@ -6,13 +6,15 @@
 
 // TODO: Move this to a separate file
 .image {
-	grid-column: var(--grid-column, 0);
+	grid-column: var(--grid-col, 0);
 	grid-row: var(--grid-row, 0);
 
 	&__wrapper {
 		--cols: 4;
+		--col-width: 250px;
 		display: grid;
 		gap: 1rem;
-		grid-template-columns: repeat(var(--cols), 1fr);
+		grid-template-columns: repeat(var(--cols), var(--col-width, 1fr));
+		place-content: center;
 	}
 }

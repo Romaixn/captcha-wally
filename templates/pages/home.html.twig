@@ -8,7 +8,7 @@
 
 		<div class="image__wrapper">
 			{% for image in images %}
-				<figure class="image" style="--grid-col: {{ image.col }};--grid-row: {{ image.row }}">
+				<figure class="image" style="--grid-col: {{ image.col + 1 }};--grid-row: {{ image.row + 1 }}">
 					<img src="{{ asset( 'build/images/' ~ image.name ) }}" alt="Where is Wally ?" />
 				</figure>
 			{% endfor %}
