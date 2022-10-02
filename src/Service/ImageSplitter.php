@@ -10,25 +10,32 @@ class ImageSplitter
     {
     }
 
-    public function split(string $imagePath): void
+    /**
+     * Split an image by a given number of rows and columns
+     * Images are saved in the public/build/images folder.
+     *
+     * @param string $imagePath The path to the image to split
+     * @param int    $cols      The number of columns
+     * @param int    $rows      The number of rows
+     */
+    public function split(string $imagePath, int $cols = 4, int $rows = 4): void
     {
-        $width = 250;
-        $height = 250;
+        $source_image = imagecreatefrompng($this->baseImagesPath.$imagePath);
+        $source_image_width = imagesx($source_image);
+        $source_image_height = imagesy($source_image);
+        $split_width = (int) round($source_image_width / $cols);
+        $split_height = (int) round($source_image_height / $rows);
 
-        $source = imagecreatefrompng($this->baseImagesPath.$imagePath);
-        $source_width = imagesx($source);
-        $source_height = imagesy($source);
+        for ($col = 0; $col < $cols; ++$col) {
+            for ($row = 0; $row < $rows; ++$row) {
+                $filename = sprintf($this->baseImagesPath.'/images/wally-generated-%02d-%02d.jpg', $col, $row);
 
-        for ($col = 0; $col < $source_width / $width; ++$col) {
-            for ($row = 0; $row < $source_height / $height; ++$row) {
-                $fn = sprintf($this->baseImagesPath.'/images/wally-generated-%02d-%02d.jpg', $col, $row);
-
-                $im = @imagecreatetruecolor($width, $height);
-                imagecopyresized($im, $source, 0, 0,
-                    $col * $width, $row * $height, $width, $height,
-                    $width, $height);
-                imagejpeg($im, $fn);
-                imagedestroy($im);
+                $image = @imagecreatetruecolor($split_width, $split_height);
+                imagecopyresized($image, $source_image, 0, 0,
+                    $col * $split_width, $row * $split_height, $split_width, $split_height,
+                    $split_width, $split_height);
+                imagejpeg($image, $filename);
+                imagedestroy($image);
             }
         }
     }
