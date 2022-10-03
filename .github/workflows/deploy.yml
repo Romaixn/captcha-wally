@@ -25,6 +25,8 @@ jobs:
     - uses: "ramsey/composer-install@v1"
       with:
         composer-options: "--prefer-dist --optimize-autoloader --no-dev"
+      env:
+        APP_ENV: prod
     - run: composer require bref/bref
     - name: serverless deploy
       uses: serverless/github-action@master
