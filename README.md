@@ -49,6 +49,11 @@ Build the assets:
 npm run dev
 ```
 
+Split base image:
+```bash
+php bin/console app:split-image images/wally-1.png
+```
+
 And go to [https://localhost:8000](https://localhost:8000) 🚀
 
 ## 🤝 Contributing
