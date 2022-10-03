@@ -1,0 +1,37 @@
+service: app
+
+provider:
+    name: aws
+    region: us-east-1
+    runtime: provided.al2
+    environment:
+        APP_ENV: prod
+
+plugins:
+  - ./vendor/bref/bref
+  - serverless-lift
+functions:
+    api:
+        handler: public/index.php
+        description: ''
+        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+        layers:
+            - ${bref:layer.php-81-fpm}
+        events:
+            -   httpApi: '*'
+
+constructs:
+  website:
+    type: server-side-website
+    assets:
+      '/build/*': public/build
+      '/favicon.ico': public/favicon.ico
+      # add here any file or directory that needs to be served from S3
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '.idea/**'
+        - '!node_modules/**'
+        - '!tests/**'
+        - 'var/**'

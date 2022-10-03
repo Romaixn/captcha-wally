@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+use Bref\SymfonyBridge\BrefKernel;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
-class Kernel extends BaseKernel
+class Kernel extends BrefKernel
 {
     use MicroKernelTrait;
 }
