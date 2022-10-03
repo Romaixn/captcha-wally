@@ -66,7 +66,7 @@ Fork this repository.
 
 Clone your forked repository.
 
-Follow the [Installing](#installing) section.
+Follow the [Installing](#gear-installing) section.
 
 After that, you can make your changes.
 
