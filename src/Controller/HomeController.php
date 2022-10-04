@@ -19,7 +19,7 @@ final class HomeController extends AbstractController
 
         $images = $imageSplitter->getSplittedImages($image);
 
-        if(empty($images)) {
+        if (empty($images)) {
             $imageSplitter->split($image);
             $images = $imageSplitter->getSplittedImages($image);
         }
