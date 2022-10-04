@@ -32,6 +32,7 @@ jobs:
         composer-options: "--prefer-dist --optimize-autoloader --no-dev"
       env:
         APP_ENV: prod
+    - run: php bin/console app:split-image images/wally-1.png
     - run: composer require bref/bref
     - name: serverless deploy
       uses: serverless/github-action@master
