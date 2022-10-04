@@ -26,12 +26,18 @@ constructs:
     assets:
       '/build/*': public/build
       '/favicon.ico': public/favicon.ico
-      # add here any file or directory that needs to be served from S3
+      '/apple-touch-icon.png': public/apple-touch-icon.png
+      '/favicon-32x32.png': public/favicon-32x32.png
+      '/favicon-16x16.png': public/favicon-16x16.png
+      '/site.webmanifest': public/site.webmanifest
+      '/safari-pinned-tab.svg': public/safari-pinned-tab.svg
 
 # Exclude files from deployment
 package:
     patterns:
-        - '.idea/**'
+        - '!.idea/**'
         - '!node_modules/**'
         - '!tests/**'
-        - 'var/**'
+        - '!var/**'
+        - '!docs/**'
+        - '!.github/**'

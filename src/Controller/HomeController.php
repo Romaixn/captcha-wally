@@ -19,6 +19,11 @@ final class HomeController extends AbstractController
 
         $images = $imageSplitter->getSplittedImages($image);
 
+        if(empty($images)) {
+            $imageSplitter->split($image);
+            $images = $imageSplitter->getSplittedImages($image);
+        }
+
         return $this->render('pages/home.html.twig', [
             'images' => $images,
         ]);
