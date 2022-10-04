@@ -32,9 +32,13 @@ jobs:
         composer-options: "--prefer-dist --optimize-autoloader --no-dev"
       env:
         APP_ENV: prod
-    - run: php bin/console app:split-image images/wally-1.png
-    - run: composer require bref/bref
-    - name: serverless deploy
+    - name: Generate split images
+      run: php bin/console app:split-image images/wally-1.png
+      env:
+        APP_ENV: prod
+    - name: Warmup cache for performances
+      run: php bin/console cache:warmup --env=prod
+    - name: Deploy
       uses: serverless/github-action@master
       with:
         args: deploy
