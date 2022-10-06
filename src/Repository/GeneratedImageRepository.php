@@ -13,10 +13,14 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method GeneratedImage|null find($id, $lockMode = null, $lockVersion = null)
  * @method GeneratedImage|null findOneBy(array $criteria, array $orderBy = null)
+ *
  * @psalm-method list<GeneratedImage> findAll()
- * @method GeneratedImage[]    findAll()
+ *
+ * @method GeneratedImage[] findAll()
+ *
  * @psalm-method list<GeneratedImage> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @method GeneratedImage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @method GeneratedImage[] findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GeneratedImageRepository extends ServiceEntityRepository
 {

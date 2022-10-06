@@ -45,9 +45,6 @@ class Captcha
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
     public function getGeneratedImages(): Collection
     {
         return $this->generatedImages;

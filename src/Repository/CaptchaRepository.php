@@ -13,10 +13,14 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Captcha|null find($id, $lockMode = null, $lockVersion = null)
  * @method Captcha|null findOneBy(array $criteria, array $orderBy = null)
+ *
  * @psalm-method list<Captcha> findAll()
- * @method Captcha[]    findAll()
+ *
+ * @method Captcha[] findAll()
+ *
  * @psalm-method list<Captcha> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @method Captcha[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @method Captcha[] findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CaptchaRepository extends ServiceEntityRepository
 {
