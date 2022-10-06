@@ -39,7 +39,6 @@ class SplitImageCommand extends Command
 
         $io->title('Image splitter');
 
-        /** @var string|null $image */
         $image = $input->getArgument('image');
         if (null !== $image) {
             $io->text(' > <info>Splitting image</info>: '.$image);
