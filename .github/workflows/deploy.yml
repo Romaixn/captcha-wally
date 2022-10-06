@@ -34,8 +34,12 @@ jobs:
         APP_ENV: prod
     - name: Create database
       run: php bin/console doctrine:database:create
+      env:
+        APP_ENV: prod
     - name: Execute migrations
       run: php bin/console doctrine:migrations:migrate --no-interaction
+      env:
+        APP_ENV: prod
     - name: Generate split images
       run: php bin/console app:split-image images/wally-1.png
       env:
