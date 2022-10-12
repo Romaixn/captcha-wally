@@ -6,13 +6,17 @@ namespace App\Service;
 
 class ImageSplitter
 {
+
+	private string $output_dir;
+	
     public function __construct(private readonly string $baseImagesPath)
     {
+		$this->output_dir = $this->baseImagesPath . '/images/captcha/splitted/';
     }
 
     /**
      * Split an image by a given number of rows and columns
-     * Images are saved in the public/build/images folder.
+     * Images are saved in the public/build/images/captcha/generated folder.
      *
      * @param string $imagePath The path to the image to split
      * @param int    $cols      The number of columns
@@ -26,9 +30,11 @@ class ImageSplitter
         $split_width = (int) round($source_image_width / $cols);
         $split_height = (int) round($source_image_height / $rows);
 
+		$this->refreshSplittedFolder();
+
         for ($col = 0; $col < $cols; ++$col) {
             for ($row = 0; $row < $rows; ++$row) {
-                $filename = sprintf($this->baseImagesPath.'/images/wally-generated-%02d-%02d.jpg', $col, $row);
+                $filename = sprintf($this->output_dir . 'wally-generated-%02d-%02d.jpg', $col, $row);
 
                 $image = @imagecreatetruecolor($split_width, $split_height);
                 imagecopyresized($image, $source_image, 0, 0,
@@ -39,6 +45,26 @@ class ImageSplitter
             }
         }
     }
+
+	/**
+	 * This function refresh the splitted folder by deleting all files inside
+	 * Also create the folder if it doesn't exist
+	 *
+	 * @return void
+	 */
+	public function refreshSplittedFolder(): void 
+	{
+		if (!file_exists($this->output_dir)) {
+			mkdir($this->output_dir, 0777, true);
+		}
+
+		$files = glob($this->output_dir . '*');
+		foreach ($files as $file) {
+			if (is_file($file)) {
+				unlink($file);
+			}
+		}
+	}
 
     /**
      * Build an array of splitted images names from the original image path.
@@ -54,7 +80,7 @@ class ImageSplitter
         $splitted_images = [];
         $generated_name = 'wally-generated-';
 
-        $images = glob($this->baseImagesPath.'/images/'.$generated_name.'*.jpg') ?: [];
+        $images = glob( $this->output_dir.$generated_name.'*.jpg') ?: [];
         $images = array_map(fn ($image) => basename($image), $images);
         sort($images);
 
@@ -72,4 +98,9 @@ class ImageSplitter
 
         return $splitted_images;
     }
+
+	public function getOutputDir(): string
+	{
+		return $this->output_dir;
+	}
 }
