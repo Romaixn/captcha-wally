@@ -44,7 +44,7 @@ class SplitImageCommand extends Command
         $image = (string) $input->getArgument('image');
         $cols = (string) $input->getArgument('cols');
         $rows = (string) $input->getArgument('rows');
-        if ( ! empty( $image )) {
+        if (!empty($image)) {
             $io->text(' > <info>Splitting image</info>: '.$image);
         } else {
             /** @var string $image */
