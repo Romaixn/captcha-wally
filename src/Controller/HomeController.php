@@ -15,13 +15,14 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ImageFinder $imageFinder, ImageSplitter $imageSplitter): Response
     {
-        $image = $imageFinder->getAssetUrl('images/wally-1.png');
+        $image_path = $imageFinder->getAssetUrl('images/captcha/wally-1.png');
 
-        $images = $imageSplitter->getSplittedImages($image);
+        $images = $imageSplitter->getSplittedImages($image_path);
 
+        // TODO : Find a way to trigger the refresh when cols/rows params in split function change | here we need to delete the splitted folder or use the SplitImageCommand which is not accurate
         if (empty($images)) {
-            $imageSplitter->split($image);
-            $images = $imageSplitter->getSplittedImages($image);
+            $imageSplitter->split($image_path);
+            $images = $imageSplitter->getSplittedImages($image_path);
         }
 
         return $this->render('pages/home.html.twig', [
