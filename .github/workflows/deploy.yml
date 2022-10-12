@@ -41,7 +41,7 @@ jobs:
       env:
         APP_ENV: prod
     - name: Generate split images
-      run: php bin/console app:split-image images/wally-1.png
+      run: php bin/console app:split-image images/captcha/wally-1.png
       env:
         APP_ENV: prod
     - name: Warmup cache for performances
