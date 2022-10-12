@@ -17,10 +17,13 @@ final class HomeController extends AbstractController
     {
         $image_path = $imageFinder->getAssetUrl('images/captcha/wally-1.png');
 
-		// Refresh the splitted folder each time
-		// TODO : The condition may be to check if the cols/rows are not the same as the previous time to avoid useless refresh
-		$imageSplitter->split($image_path);
 		$images = $imageSplitter->getSplittedImages($image_path);
+
+		// TODO : Find a way to trigger the refresh when cols/rows params in split function change | here we need to delete the splitted folder or use the SplitImageCommand which is not accurate
+		if ( empty( $images ) ) {
+			$imageSplitter->split($image_path);
+			$images = $imageSplitter->getSplittedImages($image_path);
+		}
 
         return $this->render('pages/home.html.twig', [
             'images' => $images,
