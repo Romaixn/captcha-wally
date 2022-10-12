@@ -29,7 +29,9 @@ class SplitImageCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('image', InputArgument::OPTIONAL, 'Name of image to split (ie: images/wally-1.png)')
+            ->addArgument('image', InputArgument::OPTIONAL, 'Name of image to split (ie: images/captcha/wally-1.png)')
+            ->addArgument('cols', InputArgument::OPTIONAL, 'The number of columns', 4)
+            ->addArgument('rows', InputArgument::OPTIONAL, 'The number of rows', 4)
         ;
     }
 
@@ -40,16 +42,20 @@ class SplitImageCommand extends Command
         $io->title('Image splitter');
 
         $image = $input->getArgument('image');
+        $cols = $input->getArgument('cols');
+        $rows = $input->getArgument('rows');
         if (null !== $image) {
             $io->text(' > <info>Splitting image</info>: '.$image);
         } else {
             /** @var string $image */
-            $image = $io->ask('Image to split (ie: images/wally-1.png)', 'images/wally-1.png');
+            $image = $io->ask('Image to split (ie: images/captcha/wally-1.png)', 'images/captcha/wally-1.png');
+            $cols = (int) $io->ask('The number of columns', (string) $cols);
+            $rows = (int) $io->ask('The number of rows', (string) $rows);
         }
 
         $imagePath = $this->imageFinder->getAssetUrl($image);
 
-        $this->imageSplitter->split($imagePath);
+        $this->imageSplitter->split($imagePath, $cols, $rows);
 
         $io->success('Image split successfully !');
 
