@@ -27,17 +27,21 @@ jobs:
     - uses: shivammathur/setup-php@v2
       with:
         php-version: "8.1"
-    - uses: "ramsey/composer-install@v1"
+    - uses: "ramsey/composer-install@v2"
       with:
         composer-options: "--prefer-dist --optimize-autoloader --no-dev"
       env:
         APP_ENV: prod
     - name: Create database
       run: php bin/console doctrine:database:create
+      env:
+        APP_ENV: prod
     - name: Execute migrations
       run: php bin/console doctrine:migrations:migrate --no-interaction
+      env:
+        APP_ENV: prod
     - name: Generate split images
-      run: php bin/console app:split-image images/wally-1.png
+      run: php bin/console app:split-image images/captcha/wally-1.png
       env:
         APP_ENV: prod
     - name: Warmup cache for performances
