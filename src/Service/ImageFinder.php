@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Symfony\Component\Asset\Packages;
+use Symfony\Component\Asset\PathPackage;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 final class ImageFinder
 {
-    public function __construct(private readonly Packages $assetsHelper)
+    private PathPackage $pathPackage;
+
+    public function __construct(string $baseImagesPath)
     {
+        $this->pathPackage = new PathPackage($baseImagesPath, new EmptyVersionStrategy());
     }
 
-    public function getAssetUrl(string $path): string
+    public function getImageUrl(string $name): string
     {
-        return $this->assetsHelper->getUrl($path);
+        return $this->pathPackage->getUrl($name);
     }
 }

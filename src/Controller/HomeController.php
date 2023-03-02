@@ -15,7 +15,7 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ImageFinder $imageFinder, ImageSplitter $imageSplitter): Response
     {
-        $image_path = $imageFinder->getAssetUrl('images/captcha/wally-1.png');
+        $image_path = $imageFinder->getImageUrl('wally-1.png');
 
         $images = $imageSplitter->getSplittedImages($image_path);
 

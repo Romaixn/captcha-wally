@@ -23,7 +23,7 @@ class ImageSplitter
      */
     public function split(string $imagePath, int $cols = 4, int $rows = 4): void
     {
-        $source_image = imagecreatefrompng($this->baseImagesPath.$imagePath);
+        $source_image = imagecreatefrompng($imagePath);
         $source_image_width = imagesx($source_image);
         $source_image_height = imagesy($source_image);
         $split_width = (int) round($source_image_width / $cols);
